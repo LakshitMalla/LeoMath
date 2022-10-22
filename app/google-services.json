@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "214470372517",
+    "project_id": "leomath-30215",
+    "storage_bucket": "leomath-30215.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214470372517:android:5728da443b7467e8adb14c",
+        "android_client_info": {
+          "package_name": "com.lakshit.malla.leomath"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "214470372517-bln3bi40hf48qglem5eumkldhs3pbqvf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCT_IbDpWuJudhOrkFqWlaqcRwtxnD0tUM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "214470372517-bln3bi40hf48qglem5eumkldhs3pbqvf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
