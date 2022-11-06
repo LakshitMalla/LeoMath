@@ -46,17 +46,21 @@ import androidx.core.graphics.toColorInt
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.lakshit.malla.leomath.ui.theme.Green300
+import com.lakshit.malla.leomath.ui.theme.Green500
+import com.lakshit.malla.leomath.ui.theme.YellowGreen300
 import kotlin.math.log
 
 @Composable
 fun LoginImage(@DrawableRes image: Int) {
-   Column(modifier = Modifier.fillMaxSize()) {
-       Image(
-           painter = painterResource(id = image),
-           contentDescription = "",
-           contentScale = ContentScale.Crop
-       )
-   }
+    Column(modifier = Modifier.fillMaxSize()) {
+        Image(
+            painter = painterResource(id = image),
+            contentDescription = "",
+            contentScale = ContentScale.Crop, modifier = Modifier.fillMaxSize()
+
+        )
+    }
 }
 
 @Composable
@@ -67,7 +71,8 @@ fun Username() {
 
 
     Row(horizontalArrangement = Arrangement.Center) {
-        OutlinedTextField(value = username,
+        OutlinedTextField(
+            value = username,
             onValueChange = { newText ->
                 username = newText
             },
@@ -84,7 +89,7 @@ fun Username() {
 
 @Preview
 @Composable
-fun UsernameTFPreview(){
+fun UsernameTFPreview() {
     Username()
 }
 
@@ -95,7 +100,8 @@ fun Password() {
     var password by remember { mutableStateOf(TextFieldValue("")) }
 
     Row(horizontalArrangement = Arrangement.Center) {
-        OutlinedTextField(value = password,
+        OutlinedTextField(
+            value = password,
             onValueChange = { newText ->
                 password = newText
             },
@@ -111,86 +117,45 @@ fun Password() {
 }
 
 @Composable
-fun LoginButton(navHostController: NavHostController){
-    var isClicked = false
+fun LoginButton(navHostController: NavHostController) {
+
+
+    var isPress = false
+
+
     val button_colour = ButtonDefaults.buttonColors(
-        containerColor = Color("#d5e6ff".toColorInt()),
-        contentColor = Color("#488af4".toColorInt())
+        containerColor = Color(0xFFfedd56),
+        contentColor = Color(0xFFce681d)
     )
-    ElevatedButton(onClick = {
+    ElevatedButton(
+        onClick = {
 
             navHostController.navigate("onBoarding")
 
-    }, modifier = Modifier
+            isPress = !isPress
 
-        .clip(RoundedCornerShape(10.dp))
-        .width(90.dp), colors = button_colour) {
+
+        }, modifier = Modifier
+
+            .clip(RoundedCornerShape(10.dp))
+            .width(90.dp), colors = button_colour,
+
+    ) {
         Text(text = "Login")
 
+
+
+
+
+    }
+    if (isPress == true){
+        navHostController.navigate("onBoarding")
+    }else{
+        Log.d("Log","Is working")
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun Login(windowSizeClass: WindowSizeClass,mAuth : FirebaseAuth, signIn: () -> Unit,navController: NavHostController){
-    when(windowSizeClass.widthSizeClass) {
-        WindowWidthSizeClass.Compact -> {
-        LoginImage(image = R.drawable.login_port)
-    }
 
-        WindowWidthSizeClass.Expanded -> {
-        LoginImage(image = R.drawable.login_land)
-    }
-
-        WindowWidthSizeClass.Medium -> {
-        LoginImage(image = R.drawable.login_port)
-    }
-    }
-    Row(modifier = Modifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically) {
-
-
-        Column(
-            verticalArrangement = Arrangement.SpaceEvenly, modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.55f)
-                .padding(22.dp, 7.dp)
-        ) {
-
-            Username()
-            Password()
-
-
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center
-            ) {
-
-                if (mAuth.currentUser == null) {
-                    GoogleButton {
-                        Log.d("", "SignIn")
-                        signIn()
-
-                    }
-                } else {
-                    /*GoogleButton {
-                        Log.d("","SignIn")
-                        signIn()
-
-                    }*/
-                    navController.navigate("onBoarding")
-                }
-
-
-            }
-
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                LoginButton(navController)
-            }
-
-        }
-    }
-        }
 
 
 

@@ -47,6 +47,6 @@ fun Splash(windowSizeClass: WindowSizeClass,navController: NavHostController,Mai
 @Composable
 fun SplashImage(@DrawableRes image : Int){
     Column(modifier = Modifier.fillMaxSize()) {
-        Image(painter = painterResource(id = image), contentDescription = "", contentScale = ContentScale.Crop)
+        Image(painter = painterResource(id = image), contentDescription = "", contentScale = ContentScale.Crop, modifier = Modifier.fillMaxSize())
     }
 }
