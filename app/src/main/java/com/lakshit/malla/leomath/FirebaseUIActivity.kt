@@ -36,6 +36,7 @@ fun GoogleButton(
     loadingText: String = "Creating Account.....",
     signInClicked: ()-> Unit
 
+
 ) {
 
 var clickable by remember {
@@ -50,7 +51,7 @@ var clickable by remember {
         ),
         shadowElevation = 10.dp,
         color = MaterialTheme.colorScheme.surface,
-        modifier = Modifier.padding(50.dp, 25.dp, 50.dp, 25.dp),
+
 
     ) {
 

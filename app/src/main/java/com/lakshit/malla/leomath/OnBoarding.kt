@@ -93,11 +93,13 @@ fun OnBoarding() {
                 var rememberValue by remember {
                     mutableStateOf(5)
                 }
-                ListItemPicker(
-                    value = rememberValue,
-                    onValueChange = { rememberValue = it },
-                    list = (3..8).toList(), textStyle = TextStyle(color = Color.Black.copy(alpha = 0.7f))
-                )
+                Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+                    ListItemPicker(
+                        value = rememberValue,
+                        onValueChange = { rememberValue = it },
+                        list = (3..8).toList(), textStyle = TextStyle(color = Color.Black.copy(alpha = 0.7f))
+                    )
+                }
 
             }
 

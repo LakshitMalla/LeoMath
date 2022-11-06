@@ -26,82 +26,19 @@ fun NavGraph(
     MainActivity: Activity,
     navController: NavHostController,
     windowSizeClass: WindowSizeClass,
-    mAuth : FirebaseAuth,
-    signIn : ()-> Unit
+    mAuth: FirebaseAuth,
+    signIn: () -> Unit
 ) {
     NavHost(navController = navController, startDestination = "splash") {
         composable("splash") {
-            SplashScreen(MainActivity = MainActivity, navController = navController)
-            when (windowSizeClass.widthSizeClass) {
-                WindowWidthSizeClass.Compact -> {
-                    SplashImage(image = R.drawable.splash_port)
-                }
+            Splash(windowSizeClass = windowSizeClass, navController = navController, MainActivity = MainActivity)
 
-                WindowWidthSizeClass.Expanded -> {
-                    SplashImage(image = R.drawable.splash_land)
-                }
-
-                WindowWidthSizeClass.Medium -> {
-                    SplashImage(image = R.drawable.splash_land)
-                }
-            }
         }
         composable("login") {
-            when (windowSizeClass.widthSizeClass) {
-                WindowWidthSizeClass.Compact -> {
-                    LoginImage(image = R.drawable.login_land)
-                }
+            Login(windowSizeClass = windowSizeClass, mAuth = mAuth, signIn = { signIn }, navController = navController)
 
-                WindowWidthSizeClass.Expanded -> {
-                    LoginImage(image = R.drawable.login_land)
-                }
-
-                WindowWidthSizeClass.Medium -> {
-                    LoginImage(image = R.drawable.login_land)
-                }
-            }
-            Column(verticalArrangement = Arrangement.Center, modifier = Modifier.fillMaxSize()) {
-                Surface(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.7f), color = Color.Transparent
-                ) {
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        verticalArrangement = Arrangement.Center
-                    ) {
-                        Username()
-                        Password()
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.End
-                        ) {
-
-                            if(mAuth.currentUser == null){
-                                GoogleButton {
-                                    Log.d("","SignIn")
-                                    signIn()
-
-                                }
-                            }else{
-                                /*GoogleButton {
-                                    Log.d("","SignIn")
-                                    signIn()
-
-                                }*/
-                               navController.navigate("onBoarding")
-                            }
-
-                                LoginButton()
-
-                        }
-
-                    }
-
-                }
-            }
         }
-        composable("onBoarding"){
+        composable("onBoarding") {
             OnBoarding()
         }
     }

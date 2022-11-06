@@ -27,6 +27,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 import kotlin.math.abs
 import kotlin.math.roundToInt
@@ -189,7 +190,7 @@ fun <T> ListItemPicker(
                                     ))
                                 )
                         )
-                        Spacer(modifier = Modifier.width(4.dp))
+                        Spacer(modifier = Modifier.width(6.dp))
 
                         TriangleIndicators(modifier = Modifier.width(6  .dp),isLeftOrRight = false, triangleColor = textStyle.color)
 
@@ -259,10 +260,11 @@ private fun Label(text: String, modifier: Modifier) {
             detectTapGestures(onLongPress = {
                 // FIXME: Empty to disable text selection
             })
-        }.width(100
-            .dp),
+        },
         text = text,
+
         textAlign = TextAlign.Center,
+        fontSize = 20.sp
     )
 }
 

@@ -37,39 +37,44 @@ class MainActivity : ComponentActivity() {
     private lateinit var googleSignInClient: GoogleSignInClient
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mAuth = FirebaseAuth.getInstance()
 
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
 
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        setContent {
-            var navController = rememberNavController()
-            var windowSizeClass = calculateWindowSizeClass(activity = this)
-            LeoMathTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    NavGraph(
-                        MainActivity = this,
-                        navController = navController,
-                        windowSizeClass,
-                        mAuth = mAuth
+
+
+            setContent {
+                mAuth = FirebaseAuth.getInstance()
+                val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(getString(R.string.default_web_client_id))
+                    .requestEmail()
+                    .build()
+
+                googleSignInClient = GoogleSignIn.getClient(this, gso)
+
+                var navController = rememberNavController()
+                var windowSizeClass = calculateWindowSizeClass(activity = this)
+                LeoMathTheme {
+                    // A surface container using the 'background' color from the theme
+                    Surface(
+                        modifier = Modifier.fillMaxSize(),
+                        color = MaterialTheme.colorScheme.background
                     ) {
-                        signIn()
-                    }
+                        NavGraph(
+                            MainActivity = this,
+                            navController = navController,
+                            windowSizeClass,
+                            mAuth = mAuth
+                        ) {
+                            signIn()
+                        }
 
+                    }
                 }
             }
-        }
     }
 
     private fun signIn() {
@@ -89,10 +94,10 @@ class MainActivity : ComponentActivity() {
                     val account = task.getResult(ApiException::class.java)!!
                     firebaseAuthWithGoogle(account.idToken!!)
                 } catch (e: Exception) {
-                    Log.d("SignIn", "Google SIgnIn Failed")
+                    Log.d("Failed", "Google SIgnIn Failed")
                 }
             } else {
-                Log.d("SignIn", exception.toString())
+                Log.d("Failed", exception.toString())
             }
         }
 
